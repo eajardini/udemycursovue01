@@ -20,12 +20,18 @@
 			<hr>
 			<b-button @click="salvar" 			
 				variant="primary">Salvar</b-button>
-			<b-button @click="carregar"
-				variant=""> Carregar Usuários</b-button>
-
-
-
+			<b-button @click="carregarUsuarios"
+				variant="success"
+				class="ml-2"> Carregar Usuários</b-button>
 		</b-card>
+		<hr>
+		<b-list-group>
+				<b-list-group-item v-for="(usuario, id) in usuarios" :key=id>
+						<strong size="sm">Nome: </strong> {{usuario.nome}} <br>
+						<strong>E-mail: </strong> {{usuario.email}} <br> 
+						<strong>Id: </strong> {{id}} <br>
+				</b-list-group-item>	
+		</b-list-group>
 
 	</div>
 </template>
@@ -43,13 +49,24 @@ export default {
 	},
 	methods: {
 		salvar(){
-			this.$http.post("usuarios.json", this.usuario)
-					.then (resp => {
-						alert("Usuário salvo com sucesso!", resp)
-						// this.usuario.nome = ""
-						// this.usuario.email = ""
-						this.usuario = ""
-					})
+			if (this.usuario.nome != "" && this.usuario.email != "") {
+					this.$http.post("usuarios.json", this.usuario)
+							.then (resp => {
+								alert("Usuário salvo com sucesso!", resp)
+								// this.usuario.nome = ""
+								// this.usuario.email = ""
+								this.usuario = ""
+							})
+			} else {
+				alert ("Prenchar o nome e email do usuário");
+			}
+		},
+		carregarUsuarios() {
+			 		this.$http.get("usuarios.json")
+			 				.then (resp => {
+								 this.usuarios = resp.data								 
+							 })
+
 		}		
 	}
 
