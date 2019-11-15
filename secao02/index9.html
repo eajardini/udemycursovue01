@@ -1,0 +1,51 @@
+{[{ define "secao02/index9.html" }]}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+  <title>Seção 2</title>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <h2>versão 9 - Modificadores Eventos</h2>
+    <h2>{{contador}}</h2>
+    <button v-on:click="somar()">Somar 1</button>
+   
+
+    <a href="http://www.google.com">Google (sem prevent)</a>
+    <a v-on:click.prevent="" href="http://www.google.com">Google (com prevent)</a>
+    <hr>
+
+
+    
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        contador: 0,
+        x: 0,
+        y: 0
+      },
+      methods: {
+        somar() {          
+          this.contador ++;
+        },
+      },
+    })
+  </script>
+</body>
+
+</html>
+{[{ end }]}

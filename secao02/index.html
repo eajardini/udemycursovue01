@@ -1,0 +1,41 @@
+{[{ define "secao02/index.html" }]}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+  <title>Seção 2</title>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <p>{{titulo}}</p>
+    <p>{{saudacao()}}</p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        titulo: "Seção 2!"
+      },
+      methods: {
+        saudacao: function(){
+          return "Bom dia " +  this.titulo + " !";
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
+
+{[{ end }]}

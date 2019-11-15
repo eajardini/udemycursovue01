@@ -1,0 +1,61 @@
+{[{ define "secao02/index7.html" }]}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+  <title>Seção 2</title>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <h2>versão 7 - Modificadores Eventos</h2>
+    <h2>{{contador}}</h2>
+    <button v-on:click="somar(5, $event)">Somar 1</button>
+    <p v-on:mousemove="atualizarXY">Mouse: {{x}} e {{y}}
+      <span v-on:mousemove="parar">PARA AQUI (funcao para)</span>
+      <span v-on:mousemove.stop="">PARA AQUI (propriedade stop)</span>
+    </p>
+
+    <a href="http://www.google.com">Google (sem prevent)</a>
+    <a v-on:click.prevent=""  href="http://www.google.com">Google (com prevent)</a>
+
+    
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        contador: 0,
+        x: 0,
+        y: 0
+      },
+      methods: {
+        somar(passo, evento) {
+          console.log(passo, evento)
+          this.contador = this.contador + passo
+        },
+        atualizarXY(event) {
+          this.x = event.clientX
+          this.y = event.clientY 
+        },
+        parar(event){
+          event.stopPropagation();
+          
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
+{[{ end }]}

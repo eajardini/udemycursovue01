@@ -1,0 +1,65 @@
+{[{ define "secao02/index34.html" }]}
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+  <style>
+
+    #app{
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .demo  {
+      width: 100px;
+      height: 100px;
+      background: gray;      
+    }
+
+    .c1 {
+      background-color: red;
+    }
+
+    .c2 {
+      background-color: green;
+    }
+
+    .c3 {
+      background-color: yellowgreen;
+    }
+  
+  </style>
+
+  <title>Seção 2</title>
+
+  <h2>versão 34. Estilo Dinâmico e Classe CSS </h2>
+  
+  <div id="app">
+   
+   
+   
+   
+    <div class="Demo" :class="{c1: aplicarC1}" @click="aplicarC1 = !aplicarC1"></div>
+    <div class="Demo" :class="{c2: aplicarC2}" @click="aplicarC2 = !aplicarC2"></div>
+    <div class="Demo" :class="{c3: aplicarC3}" @click="aplicarC3 = !aplicarC3"></div>
+    
+
+    
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        aplicarC1: false,
+        aplicarC2: false,
+        aplicarC3: false
+      },      
+    })
+  </script>
+
+
+
+{[{ end }]}
