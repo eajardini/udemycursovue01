@@ -1,2 +1,23 @@
 # Trabalhando com o Git
-git init .
+1 - Inicia um repositório: git init .
+
+2 - Adiciona arquivos: git add .
+
+3 - Verifica o status do repositorio: git status
+
+- Comita o repositório: git commit
+
+
+Indicações da Udemy
+
+create a new repository on the command line
+    echo "# udemycursovue01" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git remote add origin git@github.com:eajardini/udemycursovue01.git
+    git push -u origin master
+
+push an existing repository from the command line
+    git remote add origin git@github.com:eajardini/udemycursovue01.git
+    git push -u origin master
