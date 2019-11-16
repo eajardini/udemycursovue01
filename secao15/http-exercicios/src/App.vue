@@ -30,6 +30,13 @@
 						<strong size="sm">Nome: </strong> {{usuario.nome}} <br>
 						<strong>E-mail: </strong> {{usuario.email}} <br> 
 						<strong>Id: </strong> {{id}} <br>
+						<b-button 
+							variant = "warning"
+							@click="carregarParaAlterar(id)">Carregar para alterar</b-button>
+						<b-button 
+							variant = "danger"
+							@click="apagarUsuario(id)" class="ml-2">Apagar</b-button>
+
 				</b-list-group-item>	
 		</b-list-group>
 
@@ -40,7 +47,8 @@
 export default {
 	data () {
 		return {
-			usuarios:[],
+			usuarios:[],			
+			id: null,
 			usuario: {
 				nome:"",
 				email:""
@@ -48,25 +56,41 @@ export default {
 		}
 	},
 	methods: {
+		limpar(){
+				this.usuario.nome = ""
+				this.usuario.email = ""
+				this.id = null				
+		},
+		carregarParaAlterar(id){
+				this.id = id
+				this.usuario = {...this.usuarios[id]}
+		},
+		apagarUsuario(id){
+				this.$http.delete(`/usuarios/${id}.json`)
+					.then( () => this.limpar())
+		},
 		salvar(){
 			if (this.usuario.nome != "" && this.usuario.email != "") {
-					this.$http.post("usuarios.json", this.usuario)
-							.then (resp => {
-								alert("Usuário salvo com sucesso!", resp)
-								// this.usuario.nome = ""
-								// this.usuario.email = ""
-								this.usuario = ""
+					const metodo = this.id ? "patch" /*Fazendo alteração*/ : "post" /*Criando no registro*/  //Usado para determinar se está alterando ou se é um novo registro.
+					const finalURL = this.id ? `/${this.id}.json` : `.json` //Usado para determinar se está alterando ou se é um novo registro.
+					const mensagem = this.id ? "Usuário alterado com suscesso!" : "Usuário inserido com sucesso!"
+					this.$http[metodo](`/usuarios${finalURL}`, this.usuario)
+								.then ( () => { //O () substitui uma variavel como por exemplo resp. Se eu declaro uma variável, tenho de usá-la
+								alert(mensagem)							
+								this.limpar()
 							})
 			} else {
 				alert ("Prenchar o nome e email do usuário");
 			}
 		},
 		carregarUsuarios() {
-			 		this.$http.get("usuarios.json")
-			 				.then (resp => {
-								 this.usuarios = resp.data								 
-							 })
+					this.$http.get("usuarios.json")
+							.then (resp => {
+									this.usuarios = resp.data								 
+							})
 
+					// Como atribuir um token após ser autenticado
+					this.$http.defaults.headers.common["Authorization"] = "Novo Token &&%$%FF"
 		}		
 	}
 
